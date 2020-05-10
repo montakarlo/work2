@@ -7,11 +7,19 @@ let [leftHit, rightHit, leftBlock, rightBlock, leftCritical, rightCritical] = [f
 let [leftHit_value, rightHit_value, leftBlock_value, rightBlock_value, leftCritical_value, rightCritical_value] = [0,0,0,0,0,0];
 let firstPlayerHealth
 let secondPlayerHealth
-let leftCriticalTimer_boolean = true;
-let rightCriticalTimer_boolean = true;
+export let leftCriticalTimer_boolean = true;
+export let rightCriticalTimer_boolean = true;
 let finishGame = false;
 
 export async function fight(firstFighter, secondFighter) {
+  [leftHit, rightHit, leftBlock, rightBlock, leftCritical, rightCritical] = [false];
+  [leftHit_value, rightHit_value, leftBlock_value, rightBlock_value, leftCritical_value, rightCritical_value] = [0,0,0,0,0,0];
+  firstPlayerHealth
+  secondPlayerHealth
+  leftCriticalTimer_boolean = true;
+  rightCriticalTimer_boolean = true;
+  finishGame = false;
+
   firstPlayerHealth = firstFighter.health;
   secondPlayerHealth = secondFighter.health;
   console.log("Hit power: "+getHitPower(firstFighter), "Block power: "+getBlockPower(firstFighter));
@@ -28,14 +36,20 @@ export async function fight(firstFighter, secondFighter) {
           if (firstPlayerHealth<=0){
             resolve(showWinnerModal(secondFighter, 'right'))
             document.querySelector('.arena___left-fighter>img').style.display = 'none';
+
+            // document.getElementById('top_indicators')?.remove();
+
           }
           if (secondPlayerHealth<=0){
             resolve(showWinnerModal(firstFighter, 'left'))
             document.querySelector('.arena___right-fighter>img').style.display = 'none';
+            // document.getElementById('top_indicators')?.remove();
+
           }
         }
       },510);
     });
+
   })
 }
     // resolve the promise with the winner when fight is over
@@ -101,7 +115,7 @@ export function getDamage(attacker, defender) {
     }
 
 
-    console.log(firstPlayerHealth, secondPlayerHealth)
+    // console.log(firstPlayerHealth, secondPlayerHealth)
     
     leftHit_value = 0;
     rightHit_value = 0;
@@ -146,6 +160,7 @@ export function listenerCall (firstFighter, secondFighter){
         case `${controls.PlayerOneAttack}` :
           
           if (!leftHit && !leftBlock && !leftCritical) {
+            
 
             // document.querySelector('.arena___left-fighter').style.marginLeft = '300px'
 
@@ -189,9 +204,11 @@ export function listenerCall (firstFighter, secondFighter){
   
         case KeyQ && KeyW && KeyE:
           if (!leftHit && !leftBlock && !leftCritical && leftCriticalTimer_boolean) {
-            leftCriticalTimer();
+          
+            // leftCriticalTimer();
             leftCritical = true;
             rightBlock = true;
+            rightHit = false;
             leftCritical_value = 2*getHitPower(firstFighter);
             console.log("Left_critical: "+ leftCritical_value)
             getDamage( firstFighter, secondFighter )
@@ -210,11 +227,14 @@ export function listenerCall (firstFighter, secondFighter){
               document.querySelector('.arena___left-fighter>img').style.height = '430px'
               document.querySelector('.arena___left-fighter>img').style.transition = "all 0.5s";
               document.querySelector('.arena___critical-hit-left').style.display = 'none';
-
-
-    
-
             }, 500);
+            if (secondPlayerHealth>0){
+              leftCriticalTimer();
+              leftCritical = true;
+            } 
+            if (firstPlayerHealth>0){
+              leftCritical = true
+            }
           }
           break;
   
@@ -265,9 +285,11 @@ export function listenerCall (firstFighter, secondFighter){
         case KeyU && KeyI && KeyO:
   
           if (!rightHit && !rightBlock && !rightCritical && rightCriticalTimer_boolean) {
-            rightCriticalTimer();
+            // rightCriticalTimer();
             rightCritical = true;
             leftBlock = true;
+            leftHit = false;
+
             rightCritical_value = 2*getHitPower(secondFighter);
             console.log("Right_critical: "+rightCritical_value)
             getDamage( firstFighter, secondFighter )
@@ -286,10 +308,14 @@ export function listenerCall (firstFighter, secondFighter){
               document.querySelector('.arena___right-fighter>img').style.height = '430px'
               document.querySelector('.arena___right-fighter>img').style.transition = "all 0.5s";
               document.querySelector('.arena___critical-hit-right').style.display = 'none';
-
-
-  
             }, 500);
+            if (firstPlayerHealth>0){
+              rightCriticalTimer();
+              rightCritical = true;
+            } 
+            if (firstPlayerHealth>0){
+              rightCritical = true
+            }
           }
           break;
       }

@@ -29,7 +29,7 @@ function createArena(selectedFighters) {
 }
 
 function createHealthIndicators(leftFighter, rightFighter) {
-  const healthIndicators = createElement({ tagName: 'div', className: 'arena___fight-status' });
+  const healthIndicators = createElement({ tagName: 'div', className: 'arena___fight-status', attributes: { id: 'top_indicators'}});
   const versusSign = createElement({ tagName: 'div', className: 'arena___versus-sign' });
   const leftFighterIndicator = createHealthIndicator(leftFighter, 'left');
   const rightFighterIndicator = createHealthIndicator(rightFighter, 'right');

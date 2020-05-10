@@ -67,7 +67,10 @@ function renderSelectedFighters(selectedFighters) {
   // fightersPreview.append(firstPreview, versusBlock, secondPreview);
 }
 
+export let fightersForFight = [];
+
 function createVersusBlock(selectedFighters) {
+  fightersForFight.push(selectedFighters[0], selectedFighters[1]);
   const canStartFight = selectedFighters.filter(Boolean).length === 2;
   const onClick = () => startFight(selectedFighters);
   const container = createElement({ tagName: 'div', className: 'preview-container___versus-block' });
@@ -92,10 +95,3 @@ function createVersusBlock(selectedFighters) {
 export function startFight(selectedFighters) {
   renderArena(selectedFighters);
 }
-
-
-
-
-
-
-
