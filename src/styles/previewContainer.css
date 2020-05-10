@@ -3,7 +3,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 40px 40px 0px;
+  margin: 40px 40px 0;
 }
 
 .preview-container___versus-block {
@@ -28,7 +28,7 @@
   font-size: 22px;
   cursor: pointer;
   font-weight: bold;
-  box-shadow: 6px 6px 7px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 6px 6px 7px 0 rgba(0, 0, 0, 0.75);
 }
 
 .preview-container___fight-btn.disabled {

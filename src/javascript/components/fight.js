@@ -54,14 +54,9 @@ export async function fight(firstFighter, secondFighter) {
 }
     // resolve the promise with the winner when fight is over
 
-
-
-
 export function getDamage(attacker, defender) {
   let rightHealthIndicator = document.querySelector('.arena___health-bar-right');
   let leftHealthIndicator = document.querySelector('.arena___health-bar-left');
-
-
 
   if ( ((leftHit||leftBlock||leftCritical) && (rightHit||rightBlock||rightCritical)) || (!(leftHit||leftBlock||leftCritical) && !(rightHit||rightBlock||rightCritical)) || (leftCritical&&!leftHit&&!leftBlock)||(rightCritical&&!rightHit&&!rightBlock)){
     let leftDamage = leftHit_value + leftCritical_value - rightBlock_value
@@ -173,11 +168,9 @@ export function listenerCall (firstFighter, secondFighter){
               getDamage( firstFighter, secondFighter );
               document.querySelector('.arena___left-fighter').style.left = '0'
               document.querySelector('.arena___hit-left').style.display = 'none';
-
             }, 500);
           }
           break;
-  
         case `${controls.PlayerOneBlock}` :
           if (!leftHit && !leftBlock && !leftCritical && !leftBlockFromCritical) {
             leftBlock = true;
@@ -186,15 +179,11 @@ export function listenerCall (firstFighter, secondFighter){
             getDamage( firstFighter, secondFighter )
             document.querySelector('.arena___left-fighter').style.bottom = '960px'
             document.querySelector('.arena___block-left').style.display = 'block';
-
-
             setTimeout(() => {
               leftBlock = !leftBlock;
               getDamage( firstFighter, secondFighter );
               document.querySelector('.arena___left-fighter').style.bottom = '550px'
              document.querySelector('.arena___block-left').style.display = 'none';
-
-
             }, 500);
           }
           break;

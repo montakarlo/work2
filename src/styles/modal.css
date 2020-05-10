@@ -16,7 +16,6 @@
   border: 4px solid rgb(159, 0, 127);
   background-color: rgba(0, 0, 0, 0.8);
   border-radius: 10px;
-  /* box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6); */
   width: 350px;
   height: 500px;
 }
@@ -44,6 +43,7 @@
   cursor: pointer;
   color: red;
 }
+
 .restart-btn {
   font-size: 1.15rem;
   font-weight: 700;
@@ -52,7 +52,7 @@
   color: #fff;
 }
 
-.winner-block{
+.winner-block {
   width: 100%;
   height: 100%;
   display: flex;
@@ -60,7 +60,7 @@
   justify-content: center;
 }
 
-.massage_block{
+.massage_block {
   width: 200px;
   height: 60px;
   display: flex;
@@ -73,25 +73,20 @@
   background-color: rgba(0, 0, 0, 0.8);
   border-radius: 10px;
 }
-.massage_block>p{
+
+.massage_block > p {
   color: #fff;
   letter-spacing: 3.5px;
   text-align: center;
 }
 
-/* 
-.winner-block_img{
-  display: block;
-  width: auto;
-  height: 420px;
-
-} */
-.winner-block_img-left{
+.winner-block_img-left {
   display: block;
   width: auto;
   height: 420px;
 }
-.winner-block_img-right{
+
+.winner-block_img-right {
   display: block;
   width: auto;
   height: 420px;

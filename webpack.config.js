@@ -37,4 +37,4 @@ module.exports = {
     inline: true
   },
   devtool: "source-map"
-}
+};
