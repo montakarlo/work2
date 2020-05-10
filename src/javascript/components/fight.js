@@ -3,7 +3,7 @@ import {showWinnerModal} from './modal/winner'
 
 // import {fightersDetails} from '../helpers/mockData'
 import {selectedFighters} from './fighterSelector'
-let [leftHit, rightHit, leftBlock, rightBlock, leftCritical, rightCritical] = [false];
+let [leftHit, rightHit, leftBlock, rightBlock, leftCritical, rightCritical, rightBlockFromCritical, leftBlockFromCritical] = [false, false, false, false, false, false];
 let [leftHit_value, rightHit_value, leftBlock_value, rightBlock_value, leftCritical_value, rightCritical_value] = [0,0,0,0,0,0];
 let firstPlayerHealth
 let secondPlayerHealth
@@ -12,7 +12,7 @@ export let rightCriticalTimer_boolean = true;
 let finishGame = false;
 
 export async function fight(firstFighter, secondFighter) {
-  [leftHit, rightHit, leftBlock, rightBlock, leftCritical, rightCritical] = [false];
+  [leftHit, rightHit, leftBlock, rightBlock, leftCritical, rightCritical, rightBlockFromCritical, leftBlockFromCritical] = [false, false, false, false, false, false];
   [leftHit_value, rightHit_value, leftBlock_value, rightBlock_value, leftCritical_value, rightCritical_value] = [0,0,0,0,0,0];
   firstPlayerHealth
   secondPlayerHealth
@@ -161,9 +161,6 @@ export function listenerCall (firstFighter, secondFighter){
           
           if (!leftHit && !leftBlock && !leftCritical) {
             
-
-            // document.querySelector('.arena___left-fighter').style.marginLeft = '300px'
-
             leftHit = true;
             leftHit_value = getHitPower(firstFighter)
             console.log("Hit power: "+leftHit_value)
@@ -182,7 +179,7 @@ export function listenerCall (firstFighter, secondFighter){
           break;
   
         case `${controls.PlayerOneBlock}` :
-          if (!leftHit && !leftBlock && !leftCritical) {
+          if (!leftHit && !leftBlock && !leftCritical && !leftBlockFromCritical) {
             leftBlock = true;
             leftBlock_value = getBlockPower(firstFighter);
             console.log("Block power: "+leftBlock_value)
@@ -204,11 +201,11 @@ export function listenerCall (firstFighter, secondFighter){
   
         case KeyQ && KeyW && KeyE:
           if (!leftHit && !leftBlock && !leftCritical && leftCriticalTimer_boolean) {
+
           
-            // leftCriticalTimer();
+            leftCriticalTimer();
             leftCritical = true;
-            rightBlock = true;
-            rightHit = false;
+            rightBlockFromCritical = true;
             leftCritical_value = 2*getHitPower(firstFighter);
             console.log("Left_critical: "+ leftCritical_value)
             getDamage( firstFighter, secondFighter )
@@ -220,7 +217,7 @@ export function listenerCall (firstFighter, secondFighter){
 
             setTimeout(() => {
               leftCritical = !leftCritical;
-              rightBlock = !rightBlock;
+              rightBlockFromCritical = !rightBlockFromCritical
               getDamage( firstFighter, secondFighter );
               document.querySelector('.arena___left-fighter').style.left = '0'
               document.querySelector('.arena___left-fighter').style.transition = "all 0.5s"
@@ -228,13 +225,13 @@ export function listenerCall (firstFighter, secondFighter){
               document.querySelector('.arena___left-fighter>img').style.transition = "all 0.5s";
               document.querySelector('.arena___critical-hit-left').style.display = 'none';
             }, 500);
-            if (secondPlayerHealth>0){
-              leftCriticalTimer();
-              leftCritical = true;
-            } 
-            if (firstPlayerHealth>0){
-              leftCritical = true
-            }
+            // if (secondPlayerHealth>0){
+            //   leftCriticalTimer();
+            //   leftCritical = true;
+            // } 
+            // if (firstPlayerHealth>0){
+            //   leftCritical = true
+            // }
           }
           break;
   
@@ -262,7 +259,7 @@ export function listenerCall (firstFighter, secondFighter){
           break;
   
         case `${controls.PlayerTwoBlock}` :
-          if (!rightHit && !rightBlock && !rightCritical) {
+          if (!rightHit && !rightBlock && !rightCritical && !rightBlockFromCritical) {
             rightBlock = true;
             rightBlock_value = getBlockPower(secondFighter);
             console.log("Block power: "+rightBlock_value)
@@ -285,10 +282,9 @@ export function listenerCall (firstFighter, secondFighter){
         case KeyU && KeyI && KeyO:
   
           if (!rightHit && !rightBlock && !rightCritical && rightCriticalTimer_boolean) {
-            // rightCriticalTimer();
+            rightCriticalTimer();
             rightCritical = true;
-            leftBlock = true;
-            leftHit = false;
+            leftBlockFromCritical = true;
 
             rightCritical_value = 2*getHitPower(secondFighter);
             console.log("Right_critical: "+rightCritical_value)
@@ -301,7 +297,7 @@ export function listenerCall (firstFighter, secondFighter){
 
             setTimeout(() => {
               rightCritical = !rightCritical;
-              leftBlock = !leftBlock;
+              leftBlockFromCritical =!leftBlockFromCritical;
               getDamage( firstFighter, secondFighter );
               document.querySelector('.arena___right-fighter').style.right = '0';
               document.querySelector('.arena___right-fighter').style.transition = "all 0.5s"
@@ -309,17 +305,17 @@ export function listenerCall (firstFighter, secondFighter){
               document.querySelector('.arena___right-fighter>img').style.transition = "all 0.5s";
               document.querySelector('.arena___critical-hit-right').style.display = 'none';
             }, 500);
-            if (firstPlayerHealth>0){
-              rightCriticalTimer();
-              rightCritical = true;
-            } 
-            if (firstPlayerHealth>0){
-              rightCritical = true
-            }
+            // if (firstPlayerHealth>0){
+            //   rightCriticalTimer();
+            //   rightCritical = true;
+            // } 
+            // if (firstPlayerHealth>0){
+            //   rightCritical = true
+            // }
           }
           break;
+        }
       }
-    }
     }
 }
 
