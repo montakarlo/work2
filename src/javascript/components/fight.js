@@ -1,8 +1,6 @@
 import { controls } from '../../constants/controls';
 import {showWinnerModal} from './modal/winner'
-<<<<<<< Updated upstream
 
-=======
 // import {fightersDetails} from '../helpers/mockData'
 import {selectedFighters} from './fighterSelector'
 let [leftHit, rightHit, leftBlock, rightBlock, leftCritical, rightCritical] = [false];
@@ -12,7 +10,6 @@ let secondPlayerHealth
 let leftCriticalTimer_boolean = true;
 let rightCriticalTimer_boolean = true;
 let finishGame = false;
->>>>>>> Stashed changes
 
 export async function fight(firstFighter, secondFighter) {
   firstPlayerHealth = firstFighter.health;
@@ -25,13 +22,6 @@ export async function fight(firstFighter, secondFighter) {
   console.log("started");
 
   return new Promise((resolve) => {
-<<<<<<< Updated upstream
-    // resolve the promise with the winner when fight is over
-    
-    resolve (showWinnerModal(firstFighter))
-  });
-=======
-
     document.addEventListener('keydown', function(){
       setTimeout(() => {
         if ((firstPlayerHealth<=0 || secondPlayerHealth<=0) && !finishGame){
@@ -47,7 +37,6 @@ export async function fight(firstFighter, secondFighter) {
     });
     
   })
->>>>>>> Stashed changes
 }
 
     // resolve the promise with the winner when fight is over

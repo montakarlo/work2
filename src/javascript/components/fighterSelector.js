@@ -4,10 +4,8 @@ import versusImg from '../../../resources/versus.png';
 import { createFighterPreview } from './fighterPreview';
 import { callApi } from '../helpers/apiHelper';
 import {fighterService} from '../services/fightersService'
-<<<<<<< Updated upstream
-=======
+
 import { getDamage } from './fight';
->>>>>>> Stashed changes
 
 export function createFightersSelector() {
   let selectedFighters = [];
