@@ -46,18 +46,27 @@ function createHealthIndicator(fighter, position) {
   const fighterName = createElement({ tagName: 'span', className: 'arena___fighter-name' });
   const indicator = createElement({ tagName: 'div', className: 'arena___health-indicator' });
   const indicator2 = createElement({ tagName: 'div', className: 'arena___critical-indicator' });
+  const indicator3 = createElement({ tagName: 'div', className: 'arena___critical-hit' });
+  const indicator4 = createElement({ tagName: 'div', className: 'arena___hit' });
+  const indicator5 = createElement({ tagName: 'div', className: 'arena___block' });
+
+
   const bar = createElement({ tagName: 'div', className: `arena___health-bar-${position}`, attributes: { id: `${position}-fighter-indicator` }});
   const bar2 = createElement({ tagName: 'div', className: `arena___critical-bar-${position}`, attributes: { id: `${position}-critical-indicator` }});
+  const bar3 = createElement({ tagName: 'img', className: `arena___critical-hit-${position}`, attributes: {src: 'https://i.4pcdn.org/pol/1565691234779.png'}});
+  const bar4 = createElement({ tagName: 'img', className: `arena___hit-${position}`, attributes: {src: 'https://bluedragonjournaldotcom.files.wordpress.com/2018/06/boom-banner.png?w=328'}});
+  const bar5 = createElement({ tagName: 'img', className: `arena___block-${position}`, attributes: {src: 'https://i.ya-webdesign.com/images/clip-button-internal-spring-15.png'}});
+
 
   fighterName.innerText = name;
   indicator.append(bar);
   indicator2.append(bar2);
+  indicator3.append(bar3)
+  indicator4.append(bar4)
+  indicator5.append(bar5)
 
 
-
-  
-
-  container.append(fighterName, indicator, indicator2);
+  container.append(fighterName, indicator, indicator2, indicator3, indicator4, indicator5);
 
   return container;
 }

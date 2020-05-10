@@ -3,7 +3,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 40px;
+  margin: 40px 40px 0px;
 }
 
 .preview-container___versus-block {

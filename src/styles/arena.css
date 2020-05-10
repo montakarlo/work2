@@ -1,7 +1,7 @@
 .arena___root {
-  display: flex;
+  /* display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-between; */
   width: 100%;
   height: 100%;
   background-size: cover;
@@ -11,17 +11,50 @@
 }
 
 .arena___battlefield {
-  display: flex;
-  justify-content: space-around;
+  /* display: inline-block; */
+  /* display: flex;
+  justify-content: space-around; */
   margin-bottom: 60px;
+  position: relative;
+  top: 28%;
+  height: 100%;
 }
 
-.arena___right-fighter img {
+.arena___right-fighter>img {
   transform: scaleX(-1);
+  transition: all 0.5s;
+}
+.arena___left-fighter>img {
+  transition: all 0.5s;
 }
 
-.arena___fighter img {
-  height: 480px;
+
+.arena___left-fighter{
+  /* width: 400px; */
+  display: inline-block;
+  left: 0;
+  margin-left: 4%;
+  transition: all 0.5s;
+  position: absolute;
+  /* bottom: 960px; */
+  bottom: 550px;
+
+}
+
+.arena___right-fighter{
+  /* width: 400px; */
+  display: inline-block;
+  right: 0;
+  margin-right: 4%;
+  transition: all 0.5s;
+  position: absolute;
+  bottom: 550px;
+
+  
+}
+
+.arena___fighter>img {
+  height: 430px;
 }
 
 .arena___fight-status {
@@ -54,6 +87,7 @@
   border-radius: 5px;
   margin: 0 10px;
   overflow: hidden;
+  position: relative;
 }
 
 .arena___health-bar-left {
@@ -89,4 +123,57 @@
   width: 100%;
   background-color: rgb(254, 0, 216);
   float: right;
+}
+
+.arena___critical-hit-left{
+  margin-top: 10px;
+  height: 250px;
+  position: absolute;
+  left: 60px;
+  display: none;
+  z-index: 9;
+}
+
+.arena___critical-hit-right{
+  margin-top: 10px;
+  height: 250px;
+  transform: scaleX(-1);
+  position: absolute;
+  right: 60px;
+  display: none;
+  z-index: 10;
+}
+
+.arena___hit-left{
+  margin-top: 25px;
+  height: 200px;
+  position: absolute;
+  left: 60px;
+  display: none;
+  z-index: 8;
+}
+
+.arena___hit-right{
+  margin-top: 25px;
+  height: 200px;
+  position: absolute;
+  right: 60px;
+  display: none;
+  z-index: 7;
+}
+
+.arena___block-left{
+  margin-top: 575px;
+  height: 150px;
+  position: absolute;
+  left: 140px;
+  display: none;
+}
+
+.arena___block-right{
+  margin-top: 575px;
+  height: 150px;
+  position: absolute;
+  right: 140px;
+  display: none;
 }

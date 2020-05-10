@@ -88,7 +88,7 @@ function createVersusBlock(selectedFighters) {
   return container;
 }
 
-function startFight(selectedFighters) {
+export function startFight(selectedFighters) {
   renderArena(selectedFighters);
 }
 

@@ -20,7 +20,6 @@ export async function fight(firstFighter, secondFighter) {
   // addKeysEvents(firstFighter, secondFighter);
   document.addEventListener('keydown', listenerCall(firstFighter, secondFighter))
   console.log("started");
-
   return new Promise((resolve) => {
     document.addEventListener('keydown', function(){
       setTimeout(() => {
@@ -28,9 +27,11 @@ export async function fight(firstFighter, secondFighter) {
           finishGame = true;
           if (firstPlayerHealth<=0){
             resolve(showWinnerModal(secondFighter, 'right'))
+            document.querySelector('.arena___left-fighter>img').style.display = 'none';
           }
           if (secondPlayerHealth<=0){
             resolve(showWinnerModal(firstFighter, 'left'))
+            document.querySelector('.arena___right-fighter>img').style.display = 'none';
           }
         }
       },510);
@@ -38,7 +39,6 @@ export async function fight(firstFighter, secondFighter) {
     
   })
 }
-
     // resolve the promise with the winner when fight is over
 
 
@@ -50,7 +50,7 @@ export function getDamage(attacker, defender) {
 
 
 
-  if ( ((leftHit||leftBlock||leftCritical) && (rightHit||rightBlock||rightCritical)) || (!(leftHit||leftBlock||leftCritical) && !(rightHit||rightBlock||rightCritical)) ){
+  if ( ((leftHit||leftBlock||leftCritical) && (rightHit||rightBlock||rightCritical)) || (!(leftHit||leftBlock||leftCritical) && !(rightHit||rightBlock||rightCritical)) || (leftCritical&&!leftHit&&!leftBlock)||(rightCritical&&!rightHit&&!rightBlock)){
     let leftDamage = leftHit_value + leftCritical_value - rightBlock_value
     let rightDamage = rightHit_value + rightCritical_value - leftBlock_value
 
@@ -111,7 +111,6 @@ export function getDamage(attacker, defender) {
     leftCritical_value = 0;
     rightCritical_value = 0;
   }
-
 }
 
 
@@ -148,13 +147,22 @@ export function listenerCall (firstFighter, secondFighter){
         case `${controls.PlayerOneAttack}` :
           
           if (!leftHit && !leftBlock && !leftCritical) {
+
+            // document.querySelector('.arena___left-fighter').style.marginLeft = '300px'
+
             leftHit = true;
             leftHit_value = getHitPower(firstFighter)
             console.log("Hit power: "+leftHit_value)
             getDamage( firstFighter, secondFighter )
+            document.querySelector('.arena___left-fighter').style.left = `${document.documentElement.clientWidth-600}px`
+            document.querySelector('.arena___hit-left').style.display = 'block';
+
             setTimeout(() => {
               leftHit = !leftHit;
               getDamage( firstFighter, secondFighter );
+              document.querySelector('.arena___left-fighter').style.left = '0'
+              document.querySelector('.arena___hit-left').style.display = 'none';
+
             }, 500);
           }
           break;
@@ -165,9 +173,17 @@ export function listenerCall (firstFighter, secondFighter){
             leftBlock_value = getBlockPower(firstFighter);
             console.log("Block power: "+leftBlock_value)
             getDamage( firstFighter, secondFighter )
+            document.querySelector('.arena___left-fighter').style.bottom = '960px'
+            document.querySelector('.arena___block-left').style.display = 'block';
+
+
             setTimeout(() => {
               leftBlock = !leftBlock;
               getDamage( firstFighter, secondFighter );
+              document.querySelector('.arena___left-fighter').style.bottom = '550px'
+             document.querySelector('.arena___block-left').style.display = 'none';
+
+
             }, 500);
           }
           break;
@@ -176,12 +192,29 @@ export function listenerCall (firstFighter, secondFighter){
           if (!leftHit && !leftBlock && !leftCritical && leftCriticalTimer_boolean) {
             leftCriticalTimer();
             leftCritical = true;
+            rightBlock = true;
             leftCritical_value = 2*getHitPower(firstFighter);
             console.log("Left_critical: "+ leftCritical_value)
             getDamage( firstFighter, secondFighter )
+            document.querySelector('.arena___left-fighter').style.left = `${document.documentElement.clientWidth-600}px`
+            document.querySelector('.arena___left-fighter').style.transition = "all 0.1s";
+            document.querySelector('.arena___left-fighter>img').style.height = '520px';
+            document.querySelector('.arena___left-fighter>img').style.transition = "all 0.1s";
+            document.querySelector('.arena___critical-hit-left').style.display = 'block';
+
             setTimeout(() => {
               leftCritical = !leftCritical;
+              rightBlock = !rightBlock;
               getDamage( firstFighter, secondFighter );
+              document.querySelector('.arena___left-fighter').style.left = '0'
+              document.querySelector('.arena___left-fighter').style.transition = "all 0.5s"
+              document.querySelector('.arena___left-fighter>img').style.height = '430px'
+              document.querySelector('.arena___left-fighter>img').style.transition = "all 0.5s";
+              document.querySelector('.arena___critical-hit-left').style.display = 'none';
+
+
+    
+
             }, 500);
           }
           break;
@@ -194,9 +227,17 @@ export function listenerCall (firstFighter, secondFighter){
             rightHit_value = getHitPower(secondFighter);
             console.log("Hit power: "+rightHit_value)
             getDamage( firstFighter, secondFighter )
+            document.querySelector('.arena___right-fighter').style.right = `${document.documentElement.clientWidth-600}px`
+            document.querySelector('.arena___hit-right').style.display = 'block';
+
+
             setTimeout(() => {
               rightHit = !rightHit;
               getDamage( firstFighter, secondFighter );
+              document.querySelector('.arena___right-fighter').style.right = '0';
+              document.querySelector('.arena___hit-right').style.display = 'none';
+
+
             }, 500);
           }
           break;
@@ -207,10 +248,18 @@ export function listenerCall (firstFighter, secondFighter){
             rightBlock_value = getBlockPower(secondFighter);
             console.log("Block power: "+rightBlock_value)
             getDamage( firstFighter, secondFighter )
+            document.querySelector('.arena___right-fighter').style.bottom = '960px'
+            document.querySelector('.arena___block-right').style.display = 'block';
+
+
+
             setTimeout(() => {
               rightBlock = !rightBlock;
               getDamage( firstFighter, secondFighter );
-            }, 500);
+              document.querySelector('.arena___right-fighter').style.bottom = '550px'
+              document.querySelector('.arena___block-right').style.display = 'none';
+
+          }, 500);
           }
           break;
   
@@ -219,12 +268,28 @@ export function listenerCall (firstFighter, secondFighter){
           if (!rightHit && !rightBlock && !rightCritical && rightCriticalTimer_boolean) {
             rightCriticalTimer();
             rightCritical = true;
+            leftBlock = true;
             rightCritical_value = 2*getHitPower(secondFighter);
             console.log("Right_critical: "+rightCritical_value)
             getDamage( firstFighter, secondFighter )
+            document.querySelector('.arena___right-fighter').style.right = `${document.documentElement.clientWidth-600}px`
+            document.querySelector('.arena___right-fighter').style.transition = "all 0.1s"
+            document.querySelector('.arena___right-fighter>img').style.height = '520px';
+            document.querySelector('.arena___right-fighter>img').style.transition = "all 0.1s";
+            document.querySelector('.arena___critical-hit-right').style.display = 'block';
+
             setTimeout(() => {
               rightCritical = !rightCritical;
+              leftBlock = !leftBlock;
               getDamage( firstFighter, secondFighter );
+              document.querySelector('.arena___right-fighter').style.right = '0';
+              document.querySelector('.arena___right-fighter').style.transition = "all 0.5s"
+              document.querySelector('.arena___right-fighter>img').style.height = '430px'
+              document.querySelector('.arena___right-fighter>img').style.transition = "all 0.5s";
+              document.querySelector('.arena___critical-hit-right').style.display = 'none';
+
+
+  
             }, 500);
           }
           break;
