@@ -16,7 +16,10 @@ class FighterService {
   async getFighterDetails(id) {
     // todo: implement this method
     // endpoint - `details/fighter/${id}.json`;
-    return fightersDetails[id-1]
+    
+    // return fightersDetails[id-1]
+    console.log(callApi(`details/fighter/${id}.json`,FighterService.getFighters))
+    return callApi(`details/fighter/${id}.json`,FighterService.getFighters)
 
   }
 }

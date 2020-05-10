@@ -19,21 +19,22 @@ export function createFightersSelector() {
     // if (secondFighter){
     //   renderSelectedFighters(selectedFighters);
     // }
-    
     renderSelectedFighters(selectedFighters);
 
   };
 }
 
 const fighterDetailsMap = new Map();
+
 let stop = false
 
 export async function getFighterInfo(fighterId) {
-  // console.log('Champion info: + {info}'.replace('{info}', await JSON.stringify(fighterService.getFighterDetails(fighterId))))
+  let champ_info_obj = await fighterService.getFighterDetails(fighterId)
+  Object.keys(champ_info_obj).forEach(element => {
+    fighterDetailsMap.set(element, champ_info_obj[element]);
+  });
+  console.log(`Map is here: `, fighterDetailsMap)
 
-  // console.log('Champion info: + {info}'.replace('{info}', await fighterService.getFighterDetails(fighterId)))
-  // get fighter info from fighterDetailsMap or from service and write it to fighterDetailsMap
-  let champ_info_obj = fighterService.getFighterDetails(fighterId)
   return champ_info_obj
 }
 

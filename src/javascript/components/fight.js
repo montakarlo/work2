@@ -36,7 +36,6 @@ export async function fight(firstFighter, secondFighter) {
         }
       },510);
     });
-    
   })
 }
     // resolve the promise with the winner when fight is over

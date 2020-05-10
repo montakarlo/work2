@@ -9,8 +9,8 @@ export function createFighterPreview(fighter, position) {
   });
 
   // todo: show fighter info (image, name, health, etc.)
+
   // fighterElement.append(createFighterHtml())
- 
   let createFighterHtml = function(fighter){
     let fighterkeys = Object.keys(fighter).reverse()
     let fighterDiv = document.createElement('div');
