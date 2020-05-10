@@ -44,10 +44,7 @@
   cursor: pointer;
   color: red;
 }
-<<<<<<< Updated upstream
-=======
 
->>>>>>> Stashed changes
 .winner-block{
   width: 100%;
   height: 100%;
@@ -55,17 +52,13 @@
   align-items: center;
   justify-content: center;
 }
-<<<<<<< Updated upstream
 
-=======
 /* 
->>>>>>> Stashed changes
 .winner-block_img{
   display: block;
   width: auto;
   height: 420px;
-<<<<<<< Updated upstream
-=======
+
 } */
 .winner-block_img-left{
   display: block;
@@ -77,5 +70,4 @@
   width: auto;
   height: 420px;
   transform: scale(-1, 1);
->>>>>>> Stashed changes
 }

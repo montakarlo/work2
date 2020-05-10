@@ -2,10 +2,7 @@ import { createElement } from '../helpers/domHelper';
 import { createFighterImage } from './fighterPreview';
 import { fight } from './fight'
 import {showWinnerModal} from './modal/winner'
-<<<<<<< Updated upstream
-=======
 
->>>>>>> Stashed changes
 
 export function renderArena(selectedFighters) {
   const root = document.getElementById('root');
@@ -19,11 +16,8 @@ export function renderArena(selectedFighters) {
   // todo:
   // - start the fight
   // - when fight is finished show winner
-<<<<<<< Updated upstream
-  fight(selectedFighters[0],selectedFighters[1]);
-=======
+
   fight(selectedFighters[0],selectedFighters[1])
->>>>>>> Stashed changes
 
 }
 
