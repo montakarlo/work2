@@ -28,7 +28,11 @@ export function createFighterPreview(fighter, position) {
 }
 
 export function createFighterImage(fighter) {
+<<<<<<< Updated upstream
   console.log(fighter)
+=======
+
+>>>>>>> Stashed changes
   const { source, name } = fighter;
   const attributes = { 
     src: source, 

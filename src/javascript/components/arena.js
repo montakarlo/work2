@@ -2,6 +2,10 @@ import { createElement } from '../helpers/domHelper';
 import { createFighterImage } from './fighterPreview';
 import { fight } from './fight'
 import {showWinnerModal} from './modal/winner'
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 
 export function renderArena(selectedFighters) {
   const root = document.getElementById('root');
@@ -15,7 +19,11 @@ export function renderArena(selectedFighters) {
   // todo:
   // - start the fight
   // - when fight is finished show winner
+<<<<<<< Updated upstream
   fight(selectedFighters[0],selectedFighters[1]);
+=======
+  fight(selectedFighters[0],selectedFighters[1])
+>>>>>>> Stashed changes
 
 }
 
@@ -43,11 +51,19 @@ function createHealthIndicator(fighter, position) {
   const container = createElement({ tagName: 'div', className: 'arena___fighter-indicator' });
   const fighterName = createElement({ tagName: 'span', className: 'arena___fighter-name' });
   const indicator = createElement({ tagName: 'div', className: 'arena___health-indicator' });
-  const bar = createElement({ tagName: 'div', className: 'arena___health-bar', attributes: { id: `${position}-fighter-indicator` }});
+  const indicator2 = createElement({ tagName: 'div', className: 'arena___critical-indicator' });
+  const bar = createElement({ tagName: 'div', className: `arena___health-bar-${position}`, attributes: { id: `${position}-fighter-indicator` }});
+  const bar2 = createElement({ tagName: 'div', className: `arena___critical-bar-${position}`, attributes: { id: `${position}-critical-indicator` }});
 
   fighterName.innerText = name;
   indicator.append(bar);
-  container.append(fighterName, indicator);
+  indicator2.append(bar2);
+
+
+
+  
+
+  container.append(fighterName, indicator, indicator2);
 
   return container;
 }
